@@ -9,12 +9,16 @@ export const store = createStore({
         ]
     },
     getters: {
-        getUsers(state) {
+        getAllUsers(state) {
             return state.users
         },
+        getUsers(state) {
+            return state.users.filter(user => !user.admin)
+        },
+        getUserById: state => id => state.users.find(user => user.id == id),
         getUsersLength(state, getters) {
             const suffix = 'Кол-во пользователей:'
-            return `${suffix}  ${getters.getUsers.length}`
+            return `${suffix}  ${getters.getAllUsers.length}`
         }
     }
 })
